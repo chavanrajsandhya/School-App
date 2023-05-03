@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  start_date: 2023-05-03
+  end_date: 2023-05-03
+  no_of_students: 1
+
+two:
+  name: MyString
+  start_date: 2023-05-03
+  end_date: 2023-05-03
+  no_of_students: 1

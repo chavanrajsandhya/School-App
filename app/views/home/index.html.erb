@@ -1,0 +1,38 @@
+<%# if current_user.student_role? %>
+  <h3>Available courses !!!</h3>
+  <table class="table" border="1">
+    <thead>
+      <tr>
+        <td><%= "Course Name" %></td>
+        <td><%= "Course Fee" %></td>
+        <td><%= "Course Start Date" %></td>
+        <td><%= "Course End Date" %></td>
+        <td><%= "Enroll here" %></td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @courses.each do |course|  %>
+        <tr>
+          <td><%= course.name %></td>
+          <td><%= course.course_fee %></td>
+          <td><%= course.start_date %></td>
+          <td><%= course.end_date %></td>
+          <% if current_user.student_role? %>
+            <td><%= link_to "Enroll", enroll_course_path(course.id) %></td>
+          <% end %>
+        </tr>
+      <% end %>
+      </tbody>
+  </table>
+<%# end %>
+
+<br/><br/>
+<% if current_user.nil? %>
+  <%= link_to new_user_session_path, class: 'login-button' do %>Sign in<% end %>
+<% else %>
+  <% if current_user.admin_role? || current_user.school_admin_role? %>
+    <%= link_to courses_path, class: 'login-button' do %>Go to Course<% end %><br/><br/>
+    <%= link_to batches_path, class: 'login-button' do %>Go to Batch<% end %><br/><br/>
+  <% end %>
+  <%= link_to destroy_user_session_path, method: :delete do %>Log out<% end %>
+<% end %>
