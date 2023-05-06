@@ -1,0 +1,17 @@
+<!Doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Dear <%= @student.name %></h1>
+  <h3>
+    You have assigned to below batch, please check the details,
+    Batch Name: <%= @batch.name %>
+    Batch Start DateTime: <%= @batch.start_time.localtime %>
+    Batch Ends On: <%= @batch.end_time.localtime %>
+  </h3>
+</body>

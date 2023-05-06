@@ -37,9 +37,11 @@ class Ability
       can :manage, :dashboard
     end
     if user.school_admin_role?
+      can :manage, :rails_admin
       can :manage, :dashboard
       can :manage, Course
       can :manage, User
+      can :manage, Batch
     end
   end
 end

@@ -1,0 +1,25 @@
+<table border="1">
+  <thead>
+    <tr>
+      <th>Student Name</th>
+      <th>Approve Here</th>
+    </tr>
+  </thead>
+  <tbody>
+    <p><h4>Below are the students who enrolled for Course <%= @course&.name %> for Batch <%= @batch.name %></h4></p>
+    <% if @enrolled_students.present? %>
+      <% @enrolled_students.each do |student| %>
+        <tr>
+          <td><%= @users_hash[student["student_id"].to_i] %></td>
+          <% if student["is_approved"] %>
+            <td><%= "Enrolled" %></td>
+          <% else %>
+            <td><%= link_to "Approve Enrollment", approve_enrollment_home_index_path(:student_id => student["student_id"], :batch_id => @batch.id), id: "approve_enrollment_#{student["student_id"]}_#{@batch.id}", method: :post, :remote => true %></td>
+
+            <!-- <td><%#= link_to "Approve Enrollment", approve_enrollment_home_path(student["student_id"]), details: {batch_id: @batch.id}, id: "approve_enroll_#{student["student_id"]}_#{@course&.id}", method: :post, remote: true %></td> -->
+          <% end %>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

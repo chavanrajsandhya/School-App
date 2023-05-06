@@ -13,6 +13,7 @@ gem 'rails_admin', '~> 2.0'
 gem 'cancancan'
 gem 'active_scaffold'
 gem "pry-rails"
+gem "pry-nav"
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
 # Use SCSS for stylesheets

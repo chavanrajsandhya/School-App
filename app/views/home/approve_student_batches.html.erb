@@ -1,0 +1,20 @@
+<div>
+  <p>
+    <label>List of Batches: </label>
+    <%= select_tag "batches", options_for_select(@batches, ""), id: "batch_list", onchange: "showBatchStudents();" %>
+  </p>
+</div>
+<div id="student_list" style="display: none;"></div>
+<br/><br/>
+<%= link_to root_path, method: :get do %>Back<% end %>
+
+<script type="text/javascript">
+  function showBatchStudents(){
+    var batch_id = $("#batch_list").val();
+    $.ajax({
+      url: "/home/show_students",
+      data: {"batch_id": batch_id},
+      type: "GET"
+    });
+  }
+</script>

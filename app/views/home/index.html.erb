@@ -1,38 +1,57 @@
-<%# if current_user.student_role? %>
-  <h3>Available courses !!!</h3>
-  <table class="table" border="1">
-    <thead>
-      <tr>
-        <td><%= "Course Name" %></td>
-        <td><%= "Course Fee" %></td>
-        <td><%= "Course Start Date" %></td>
-        <td><%= "Course End Date" %></td>
-        <td><%= "Enroll here" %></td>
-      </tr>
-    </thead>
-    <tbody>
-      <% @courses.each do |course|  %>
-        <tr>
-          <td><%= course.name %></td>
-          <td><%= course.course_fee %></td>
-          <td><%= course.start_date %></td>
-          <td><%= course.end_date %></td>
-          <% if current_user.student_role? %>
-            <td><%= link_to "Enroll", enroll_course_path(course.id) %></td>
-          <% end %>
-        </tr>
+<div class="wpb_text_column wpb_content_element  vc_custom_1504257572335">
+  <div class="wpb_wrapper">
+    <h2 class="main-h"><span class="prime-c">About</span> <span class="sec-c">School</span></h2>
+
+  </div>
+</div>
+<div class="wpb_text_column wpb_content_element ">
+  <div class="wpb_wrapper">
+    <p>NPS Agara follows&nbsp;Central Board of Secondary Education (CBSE), the national body of the Government of India in Secondary Education. National Public School, Agara is synonymous with academic excellence and the development of personality. The school has responded readily to the standards adopted to facilitate modern and technology based teaching and learning , whilst retaining the culture, tradition and values embedded in the education system.</p>
+
+  </div>
+</div>
+<h3>Available courses !!!</h3>
+<table class="table" border="1">
+  <thead>
+    <tr>
+      <th><%= "Course Name" %></th>
+      <th><%= "Course Fee" %></th>
+      <th><%= "Course Start Date" %></th>
+      <th><%= "Course End Date" %></th>
+      <% if current_user.student_role? %>
+        <th><%= "Enroll here" %></th>
       <% end %>
-      </tbody>
-  </table>
-<%# end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @courses.each do |course|  %>
+      <tr>
+        <td><%= course.name %></td>
+        <td><%= course.course_fee %></td>
+        <td><%= course.start_date %></td>
+        <td><%= course.end_date %></td>
+        <% if current_user.student_role? %>
+          <% if is_student_enrolled?(course) %>
+            <td><%= "Enrolled" %></td>
+          <% else %>
+            <td><%= link_to "Enroll", enroll_home_path(course.id), id: "enroll_#{current_user.id}_#{course.id}", method: :post, remote: true %></td>
+          <% end %>
+        <% end %>
+      </tr>
+    <% end %>
+    </tbody>
+</table>
 
 <br/><br/>
 <% if current_user.nil? %>
   <%= link_to new_user_session_path, class: 'login-button' do %>Sign in<% end %>
 <% else %>
   <% if current_user.admin_role? || current_user.school_admin_role? %>
+    <%= link_to rails_admin_path do %>Admin Dashboard<% end %><br/><br>
+    <%= link_to schools_path do %>Update School Info here<% end %><br/><br>
     <%= link_to courses_path, class: 'login-button' do %>Go to Course<% end %><br/><br/>
     <%= link_to batches_path, class: 'login-button' do %>Go to Batch<% end %><br/><br/>
+    <%= link_to approve_student_batches_home_index_path, class: 'login-button' do %>Assign Students to Batches<% end %><br/><br/>
   <% end %>
   <%= link_to destroy_user_session_path, method: :delete do %>Log out<% end %>
 <% end %>
