@@ -6,20 +6,13 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby version - 2.6.5
+* Rails Version - Rails 6.0.6.1
+* Database - MySQL
+* Gems added
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+  => gem 'mysql2'
+  => gem 'devise'
+  => gem 'rails_admin', '~> 2.0'
+  => gem 'cancancan'
+  => gem 'active_scaffold'
